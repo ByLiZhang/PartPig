@@ -2,7 +2,7 @@
 <img src = "./src/assets/images/partpiglogo.png">
 
 ## PartPig
-PartPig is an e-commerce platform build to facilitate the trading of used car parts.
+PartPig is an e-commerce platform built to facilitate the trading of used car parts.
 
 ## Motivation
 PartPig exists to fill the gap in connecting the buyer and the seller in a way that is user friendly and convenient.
