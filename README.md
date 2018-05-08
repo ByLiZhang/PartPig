@@ -16,7 +16,7 @@ PartPig is still in beta. Because of that we focused most of the parts for sale 
 Please search these categories to get a better experience.
 
 ### Project
-view this project [live](partpig.bylizhang.com)
+view this project [live](http://partpig.bylizhang.com)
 
 
 ## Features
