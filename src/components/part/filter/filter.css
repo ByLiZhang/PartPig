@@ -1,0 +1,56 @@
+.filter{
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+    width: 15%;
+    transition: all 1s ease-in;
+}
+
+.filterScroll{
+    max-height: 30vh;
+    overflow: auto;
+}
+/* 
+.filterScroll::-webkit-scrollbar {
+    display: none;
+} */
+
+.filter h3{
+    background-color: black;
+    color: whitesmoke;
+    padding: 3%;
+    margin-top: 15%;
+    margin-bottom: 6%;
+}
+
+.rs-container{
+    margin-top: 20%;
+}
+
+.hidden{
+    display: none;
+}
+
+
+.filterBrand{
+    padding: 1%;  
+}
+
+.filterBrand div:first-child{
+    display: inline-block;
+    vertical-align: middle; 
+    width: 22%;    
+    text-align: right;
+}
+
+.filterBrand div:nth-child(2){
+    display: inline-block;
+    vertical-align: middle;  
+    margin: 0.5% 1%; 
+    font-weight: bold;
+    width: 75%;
+}
+
+
+
+

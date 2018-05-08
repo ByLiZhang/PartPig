@@ -1,0 +1,10 @@
+.idea
+.DS_Store
+.vscode
+
+node_modules
+vendor
+
+mysqlConnect.php
+awsConnect.php
+mailDetails.php
