@@ -16,7 +16,7 @@ PartPig is still in beta. Because of that we focused most of the parts for sale 
 Please search these categories to get a better experience.
 
 ### Project
-view this project [live](partpig.briantmorris.com)
+view this project [live](http://partpig.bylizhang.com)
 
 
 ## Features
@@ -42,4 +42,4 @@ view this project [live](partpig.briantmorris.com)
 [Briantmorr](https://github.com/Briantmorr)
 
 ## License
-This project is licensed under the MIT License © [Brian Morris](https://briantmorris.com)
+This project is licensed under the MIT License © [Li Zhang](https://byLiZhang.com)
