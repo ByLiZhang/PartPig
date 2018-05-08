@@ -116,7 +116,7 @@ class PartInfo extends Component {
     savePartInfo(){
 
         //axios call to update the part  
-        const url = "http://localhost:8000/teampartpig/src/assets/php/editPartDetails.php";
+        const url = "/assets/php/editPartDetails.php";
 
         axios({
             url: url,
@@ -150,7 +150,7 @@ class PartInfo extends Component {
             status: 'available',
             id: this.state.partInfo.id
         };
-        const urlStatus = 'http://localhost:8000/teampartpig/src/assets/php/updatePartStatus.php';
+        const urlStatus = '/assets/php/updatePartStatus.php';
         axios.get(urlStatus, { params }).then(resp => {
             if (resp.data.success) {
                 this.props.history.push('/dashboard/activeparts');
@@ -168,7 +168,7 @@ class PartInfo extends Component {
             status: 'deleted',
             id: this.state.partInfo.id
         };
-        const urlStatus = 'http://localhost:8000/teampartpig/src/assets/php/updatePartStatus.php';
+        const urlStatus = '/assets/php/updatePartStatus.php';
         axios.get(urlStatus, { params }).then(resp => {
             if (resp.data.success) {
                 this.props.history.push('/sellpart');

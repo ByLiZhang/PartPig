@@ -19,7 +19,7 @@ class UserParts extends Component {
 
     componentDidMount(){
         const seller_id = this.state.seller_id;
-        const url = 'http://localhost:8000/teampartpig/src/assets/php/allPartBySeller.php';
+        const url = '/assets/php/allPartBySeller.php';
         const params = {seller_id};      
         axios.get(url,{params}).then(resp=>{               
                 this.setState({

@@ -28,7 +28,7 @@ class UpdatePartStatus extends Component {
      */
     updateStatus(){
         const params = {status: this.state.pendingStatus, id: this.props.id};
-        const url = 'http://localhost:8000/teampartpig/src/assets/php/updatePartStatus.php';      
+        const url = '/assets/php/updatePartStatus.php';      
         axios.get(url,{params}).then(resp=>{
                 this.setState({
                     status:resp.data.data.status,

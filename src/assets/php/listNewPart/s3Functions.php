@@ -41,7 +41,7 @@ function saveAndUploadImageToAws($img, $filePath, $index){
     $s3Client = $sdk->createS3();
     try{
         $result =  $s3Client->putObject([
-            'Bucket' => 'teampartpig',
+            'Bucket' => 'teampartpig-images',
             'Key'    => "$filePath/$fileName" ,
             'Body'   => fopen($tempFilePath, 'r'),
             'ACL'    => 'public-read',

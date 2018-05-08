@@ -46,7 +46,7 @@ class Checkout extends Component {
                     user_id: parseInt(this.userId),
                     addressType: 'shipping'
                 };
-                const url = 'http://localhost:8000/teampartpig/src/assets/php/CheckoutEndpoints/getAddressInfo.php';
+                const url = '/assets/php/CheckoutEndpoints/getAddressInfo.php';
                 axios.get(url, { params }).then(resp => {
                     this.setState({
                         shippingAddress: resp.data.data[0]
@@ -56,7 +56,7 @@ class Checkout extends Component {
                         user_id: parseInt(this.userId),
                         addressType: 'billing'
                     };
-                    const url = 'http://localhost:8000/teampartpig/src/assets/php/CheckoutEndpoints/getAddressInfo.php';
+                    const url = '/assets/php/CheckoutEndpoints/getAddressInfo.php';
                     axios.get(url, { params }).then(resp => {
                         this.setState({
                             isLoading: true,
@@ -91,7 +91,7 @@ class Checkout extends Component {
             status: 'incheckout',
             id: JSON.stringify(partsId)
         };
-        const urlStatus = 'http://localhost:8000/teampartpig/src/assets/php/CheckoutEndpoints/multipleStatusUpdates.php';
+        const urlStatus = '/assets/php/CheckoutEndpoints/multipleStatusUpdates.php';
         axios.get(urlStatus, { params }).then(resp => {
            
         }).catch(err => {
@@ -153,7 +153,7 @@ class Checkout extends Component {
             status: 'available',
             id: JSON.stringify(partsId)
         };
-        const urlStatus = 'http://localhost:8000/teampartpig/src/assets/php/CheckoutEndpoints/multipleStatusUpdates.php';
+        const urlStatus = '/assets/php/CheckoutEndpoints/multipleStatusUpdates.php';
         axios.get(urlStatus, { params }).then(resp => {
             if (resp.data.success) {
                 this.props.history.push('/cart');
@@ -197,7 +197,7 @@ class Checkout extends Component {
                     buyer_id: this.userId,
                     id: JSON.stringify(partsId)
                 };
-                const urlStatus = 'http://localhost:8000/teampartpig/src/assets/php/CheckoutEndpoints/multipleStatusUpdates.php';
+                const urlStatus = '/assets/php/CheckoutEndpoints/multipleStatusUpdates.php';
                 axios.get(urlStatus, { params }).then(resp => {
                     if (resp.data.success) {
                         //remove the variables for addresses in the local storage
@@ -205,7 +205,7 @@ class Checkout extends Component {
                         localStorage.removeItem("billing");
                         if (this.state.saveShippingAddress || this.state.saveBillingAddress) {
                             //Save addresses in the DB if the user checked the save option
-                            const url = "http://localhost:8000/teampartpig/src/assets/php/CheckoutEndpoints/updateAddressInfo.php";
+                            const url = "/assets/php/CheckoutEndpoints/updateAddressInfo.php";
 
                             const data = {
                                 "user_id": this.userId,
@@ -238,7 +238,7 @@ class Checkout extends Component {
                         this.props.removeAllPartsFromCart(this.props.cartParts);
                         this.props.history.push('/checkoutComplete/' + resp.data.data.order_number);
 
-                        const emailUrl = "http://localhost:8000/teampartpig/src/assets/php/Mail/transactionalEmail.php";
+                        const emailUrl = "/assets/php/Mail/transactionalEmail.php";
                         const emailData = {
                             name: `${this.state.billingAddress.first_name} ${this.state.billingAddress.last_name} `,
                             email: `${this.state.billingAddress.email}`,

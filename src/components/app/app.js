@@ -38,7 +38,6 @@ class App extends Component {
 
         this.addPart = this.addPart.bind(this);
         this.removePart = this.removePart.bind(this);
-        this.removeListing = this.removeListing.bind(this);
         this.saveFilters = this.saveFilters.bind(this);
         this.saveUrlBack = this.saveUrlBack.bind(this);
         this.setUserData = this.setUserData.bind(this);
@@ -70,7 +69,7 @@ class App extends Component {
             user_id: parseInt(userId)
         };
         this.removeAllPartsYouOwnFromCart(this.state.cartParts);
-        const url = 'http://localhost:8000/teampartpig/src/assets/php/buyerCart.php';
+        const url = '/assets/php/buyerCart.php';
         axios.get(url, { params }).then(resp => {
             if (resp.data.success) {
                 resp.data.data.map((item, index) => {
@@ -81,7 +80,7 @@ class App extends Component {
                 });
             }
         }).catch(err => {
-            console.log('error is: ', err);
+            // console.log('error is: ', err);
             this.props.history.push('/error');
 
         });
@@ -104,11 +103,11 @@ class App extends Component {
                 part_id: parseInt(partInfo.id),
                 user_id: parseInt(this.state.userId)
             };
-            const url = 'http://localhost:8000/teampartpig/src/assets/php/addPartToCart.php';
+            const url = '/assets/php/addPartToCart.php';
             axios.get(url, { params }).then(resp => {
                 this.addPartToCart(partInfo, initLoad);
             }).catch(err => {
-                console.log('error is: ', err);
+                // console.log('error is: ', err);
                 this.props.history.push('/error');
 
             });
@@ -158,11 +157,11 @@ class App extends Component {
                 part_id: parseInt(partInfo.id),
                 user_id: parseInt(this.state.userId)
             };
-            const url = 'http://localhost:8000/teampartpig/src/assets/php/deletePartFromCart.php';
+            const url = '/assets/php/deletePartFromCart.php';
             axios.get(url, { params }).then(resp => {
                 this.removePartFromCart(partInfo);
             }).catch(err => {
-                console.log('error is: ', err);
+                // console.log('error is: ', err);
                 this.props.history.push('/error');
 
             });
@@ -204,10 +203,6 @@ class App extends Component {
         this.setState({
             cartParts: partList
         });
-    }
-
-    removeListing(partInfo) {
-        console.log("removed part")
     }
 
     saveFilters(filters) {

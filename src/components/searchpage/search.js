@@ -40,7 +40,6 @@ class DropDownContainer extends Component {
     }
 
     catchYearSelect(selectedYear){
-        console.log(selectedYear);
         const caughtYear = selectedYear
         this.setState({
             year: caughtYear

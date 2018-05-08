@@ -107,7 +107,7 @@ class SignUpDetails extends Component {
             let params = {
                 first_name, middle_name, last_name, phone_number, userId
             }
-            const url = 'http://localhost:8000/teampartpig/src/assets/php/login/updateUserName.php';
+            const url = '/assets/php/login/updateUserName.php';
             promiseArray.push(axios({
                 url: url,
                 method: 'post',
@@ -122,7 +122,7 @@ class SignUpDetails extends Component {
             let params = {
                 city, state_abbr, state, apt_suite, street_address, zipcode, userId
             }
-            const url = 'http://localhost:8000/teampartpig/src/assets/php/login/newAddress.php';
+            const url = '/assets/php/login/newAddress.php';
             promiseArray.push(axios({
                 url: url,
                 method: 'post',
@@ -137,7 +137,6 @@ class SignUpDetails extends Component {
         Promise.all(promiseArray)
             .then(resp => {
                 this.props.history.push('/login');
-
             }).catch(err => {
                 // console.log('error is: ', err);
                 this.props.history.push('/error');

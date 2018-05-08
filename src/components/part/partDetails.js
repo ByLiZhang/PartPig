@@ -20,7 +20,7 @@ class PartDetails extends Component {
         const id = this.props.match.params.id;
         //call the server to get the information of that specific part
         if(id){
-            const url = 'http://localhost:8000/teampartpig/src/assets/php/singleItemDetail.php';
+            const url = '/assets/php/singleItemDetail.php';
             const params = {id};      
             axios.get(url,{params}).then(resp=>{  
                 

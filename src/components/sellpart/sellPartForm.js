@@ -57,7 +57,7 @@ class SellPartForm extends Component{
     componentDidUpdate(){
         
         if(this.state.isLoading){
-            const url = "http://localhost:8000/teampartpig/src/assets/php/listNewPart/processSellPartForm.php";
+            const url = "/assets/php/listNewPart/processSellPartForm.php";
             
             axios({
                 url: url,
@@ -67,10 +67,9 @@ class SellPartForm extends Component{
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(resp=>{
-                console.log("Server Response:", resp);
                 this.props.history.push(`/partdetails/${resp.data.data[0]}/newPart/true`);
             }).catch(err => {
-                console.log("There was an error:");
+                // console.log("There was an error:");
                 this.props.history.push('/error');                
 
             });

@@ -121,14 +121,13 @@ class SignUp extends Component {
 
         if((this.state.password === this.state.confirmPass) && ((this.state.password.length > 7) && (this.state.confirmPass.length > 7))){
            axios({
-               url: 'http://localhost:8000/teampartpig/src/assets/php/login/newUserSignup.php',
+               url: '/assets/php/login/newUserSignup.php',
                method: 'post',
                data: params,
                headers: {
                    'Content-Type': 'application/x-www-form-urlencoded'
                }
-            }).then(resp => {
-               console.log('response is: ', resp);
+            }).then(resp => {               
                if(resp.data.data[0] === 'invalid email'){
                     this.setState({
                        isLoading: false,
@@ -148,7 +147,7 @@ class SignUp extends Component {
                     this.props.history.push(`/signUpDetails/${userId}`);
                 }
             }).catch(err => {
-               console.log('error is: ', err);
+            //    console.log('error is: ', err);
                this.props.history.push('/error');                
 
             });

@@ -74,7 +74,7 @@ class PartList extends Component{
         if (!this.state.isLoading) {           
             const {make,model,year,keyword} = this.props.match.params;
             const params = {make,model,year,keyword};
-            const url = 'http://localhost:8000/teampartpig/src/assets/php/searchSubmit.php';    
+            const url = '/assets/php/searchSubmit.php';    
             //call the server to search with the conditions we have in the search    
             axios.get(url,{params}).then(resp=>{
                     try {

@@ -1,10 +1,4 @@
 <?php
-//blunt fix, will refactor this when we upload to server
-header("Access-Control-Allow-Origin: *");
-header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE');
-header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-
-require("../mysqlConnect.php");
 
 $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
@@ -14,6 +8,8 @@ $output = [
     'error' => [],
     'data' => []
 ];
+
+require("../config/mysqlConnect.php");
 require_once('./addImagesToS3.php');
 
 
