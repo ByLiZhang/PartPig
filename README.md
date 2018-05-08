@@ -42,4 +42,5 @@ view this project [live](http://partpig.bylizhang.com)
 [Briantmorr](https://github.com/Briantmorr)
 
 ## License
-This project is licensed under the MIT License © [Li Zhang](https://byLiZhang.com)
+This project is licensed under the MIT License © [Li Zhang](http://bylizhang.com)
+
