@@ -3,8 +3,8 @@
 .vscode
 
 node_modules
-mysqlConnect.php
 vendor
-awsConnect.php
 
+mysqlConnect.php
+awsConnect.php
 mailDetails.php
