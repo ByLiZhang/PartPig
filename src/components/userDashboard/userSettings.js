@@ -7,18 +7,16 @@ import construction from '../../assets/images/webConstruction.jpg';
 
 class UserSettings extends Component {
         
-        render(){
-            return  (
-
-                <div className="userPartsContainer">     
-                    <div className="userPartsList">
-                        <h2>Your Settings</h2>
-                        <img src={construction} alt=""/>
-                    </div>
+    render(){
+        return  (
+            <div className="userPartsContainer">     
+                <div className="userPartsList">
+                    <h2>Your Settings</h2>
+                    <img src={construction} alt=""/>
                 </div>
-            );
-                    
+            </div>
+        );
     }
 }
 
-export default UserSettings
+export default UserSettings;

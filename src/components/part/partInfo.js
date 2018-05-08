@@ -14,7 +14,7 @@ class PartInfo extends Component {
             partInfo:props.partInfo,
             editable: false,
             updated: false,
-            errorPrice: ''
+            errorPrice: ''  //if user edit the price wrongly
         }
         this.oldPartInfo = props.partInfo; 
         this.editField = this.editField.bind(this);
@@ -22,6 +22,9 @@ class PartInfo extends Component {
         this.resetPartInfo = this.resetPartInfo.bind(this);
     }
 
+    /**
+     * add the the part to the user cart and move to the results page
+     */
     addCart(){
         this.props.addCart(this.state.partInfo,false);
         if(this.props.history){
@@ -29,6 +32,11 @@ class PartInfo extends Component {
         }   
     }
     
+    /**
+     * check if the obj is in the list
+     * @param {*} obj 
+     * @param {*} list 
+     */
     containsObject(obj, list) {        
         for (let i = 0; i < list.length; i++) {
             if (list[i].id === obj.id) {
@@ -38,11 +46,17 @@ class PartInfo extends Component {
         return false;
     }
     
+    /**
+     * when a element the user is editing lose the focus we change the information of the part in the state
+     * 
+     * @param {*} event 
+     */
     editField(event){
         event.preventDefault();
         const element = event.target;
         const elementId = element.id;
         const elementText = element.textContent
+        //control if the price the user change is still a number
         if(elementId==='price_usd' && isNaN(elementText)){
             this.setState({
                 errorPrice:'Please input a valid price'
@@ -57,8 +71,15 @@ class PartInfo extends Component {
         }
     }
 
+    /**
+     * when the user click in the edit's button we make some elements editables
+     * 
+     * @param {*} element Parent element from we have to change the childs
+     * @param {*} editableFlag boolean indicate if the element is editable or not
+     */
     handleEditButton(element,editableFlag){
         const numChild = element.childNodes.length
+        //go throught all the elment childs 
         for(let i = 0; i < numChild; i++){
             let child = element.childNodes[i];
             if(child.tagName === 'SPAN' && child.id !==''){
@@ -72,11 +93,15 @@ class PartInfo extends Component {
                     child.classList.remove("editable");
                 }
             }else{
+                //if the child is not SPAN element we check the childrens of this element
                 this.handleEditButton(child,editableFlag);
             }
         }
     }
 
+    /**
+     * if the user cancel we get back the original info of the part
+     */
     resetPartInfo(){
         this.setState({
             editable:false,
@@ -85,6 +110,9 @@ class PartInfo extends Component {
         this.handleEditButton(document.getElementsByClassName('productDetailsContainer')[0],false);
     }
 
+    /**
+     * we save the new info of the part in the DB
+     */
     savePartInfo(){
 
         //axios call to update the part  
@@ -97,21 +125,26 @@ class PartInfo extends Component {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-        }).then(resp=>{     
+        }).then(resp=>{ 
+            //stablish the new data as a old data    
             this.oldPartInfo = this.state.partInfo;                  
             this.setState({
                 editable:false,
                 updated: true
-            });     
+            }); 
+            //make all the elements not editables    
             this.handleEditButton(document.getElementsByClassName('productDetailsContainer')[0],false);
             
         }).catch(err => {
-            console.log("There was an error:");
+            // console.log("There was an error:");
             this.props.history.push('/error');            
         });
         
     }
 
+    /**
+     * change the status of the part to available
+     */
     confirmPart(){       
         const params = {
             status: 'available',
@@ -123,10 +156,13 @@ class PartInfo extends Component {
                 this.props.history.push('/dashboard/activeparts');
             }
         }).catch(err => {
-            console.log('error is: ', err);
+            // console.log('error is: ', err);
         });
     }
 
+    /**
+     * if the user is listing a new part and cancel we delete that part
+     */
     cancelPart(){        
         const params = {
             status: 'deleted',
@@ -138,11 +174,12 @@ class PartInfo extends Component {
                 this.props.history.push('/sellpart');
             }
         }).catch(err => {
-            console.log('error is: ', err);
+            // console.log('error is: ', err);
         });
     }
 
     componentDidMount(){
+        //if the action came from the dashboard we put the element as editables
         if(this.props.fromDashboard=='true'){
             this.handleEditButton(document.getElementsByClassName('productDetailsContainer')[0],true);
             this.setState({
@@ -169,6 +206,7 @@ class PartInfo extends Component {
         let confirmButton = '';
         let deletePartButton = '';
 
+        //depends from wehre the user arrive to this component we show some buttons or others
         if(this.props.isCart){
             multiUsebutton = <button className='button-link' onClick={()=>this.props.removePart(this.state.partInfo)}>Remove</button>;
         }else if(this.props.fromDashboard=='true'|| this.props.newPart=='true'){
@@ -177,7 +215,12 @@ class PartInfo extends Component {
                 deletePartButton = <button className='button-link editButton' onClick={this.cancelPart.bind(this)}>Cancel</button>;
             }
             if(this.state.editable){
-                editableUsebutton = <button className='button-link editButton' onClick={this.savePartInfo.bind(this)}>Save</button>;
+                if(this.state.errorPrice === ''){
+                    editableUsebutton = <button className='button-link editButton' onClick={this.savePartInfo.bind(this)}>Save</button>;
+                }
+                else{
+                    editableUsebutton = <button className='button-link editButton disabled'>Save</button>;
+                }
                 cancelButton = <button className='button-link editButton' onClick={this.resetPartInfo}>Cancel</button>;
                 messageEditable = <span className='editMessage'>Click in the elements on blue to edit them</span>
                 confirmButton='';
@@ -198,6 +241,7 @@ class PartInfo extends Component {
             }
         }
 
+        //info only show in the details component
         if(this.props.isDetails){
             details = (
                 <div>

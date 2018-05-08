@@ -1,6 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-require_once('mysqlConnect.php');
+require_once('./config/mysqlConnect.php');
 //basic output format, all data gets pushed into data[]
 $output = [
     'success'=> false,

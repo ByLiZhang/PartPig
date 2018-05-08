@@ -60,7 +60,6 @@ var states = [
 export default states;
 
 export function abbrState(input, to){   
-    console.log('hello');
     if (to == 'abbr'){
         for(let i = 0; i < states.length; i++){
             if(states[i][1] == input){

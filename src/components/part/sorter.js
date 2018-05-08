@@ -10,6 +10,10 @@ class Sorter extends Component {
         }
     }
 
+    /**
+     * Handle when the user change the select and send back to the partList component the method to order
+     * @param {*} event 
+     */
     handleChange(event){
         const method = event.target.value;
         this.props.sortPartArray(this.sortMethods[method]);

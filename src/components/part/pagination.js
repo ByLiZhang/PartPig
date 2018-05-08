@@ -17,10 +17,12 @@ class Pagination extends Component {
     }
 
     componentWillReceiveProps(newProps){    
-        
+        //we change the data and num of pages when the parts information change probably for the filters
         if(this.props.allParts !== newProps.allParts){
             const allParts = newProps.allParts;
+            //calculate the num of pages
             const numPages = Math.ceil(allParts.length / this.partsPerPage);
+            //we only show the parts of the current page
             const currentParts = allParts.slice(this.partsPerPage*this.state.currentPage,(this.partsPerPage)+(this.partsPerPage*this.state.currentPage));
 
             this.setState({
@@ -35,7 +37,9 @@ class Pagination extends Component {
 
         if(this.state.changePage){
             const allParts = this.props.allParts;
+            //calculate the num of pages
             const numPages = Math.ceil(allParts.length / this.partsPerPage);
+            //we only show the parts of the current page
             const currentParts = allParts.slice(this.partsPerPage*this.state.currentPage,(this.partsPerPage)+(this.partsPerPage*this.state.currentPage));
 
             this.setState({
@@ -48,6 +52,7 @@ class Pagination extends Component {
 
     handleButtonOnClick(event){
         let numPage = event.target['id'];
+        //we move the focus to the top of the window
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         switch(numPage){
@@ -74,6 +79,7 @@ class Pagination extends Component {
 
     render(){
         let list = "";
+        //if we don't have any results we show a specific message
         if(this.state.currentParts.length === 0){
             list = <NoResults/>
         };
@@ -88,7 +94,7 @@ class Pagination extends Component {
 
         let pageButtons = [];
         if(this.state.numPages > 0){  
-            
+            //calculate the min and max number to show in the pagination
             let min = this.state.currentPage-2 > 0 ? this.state.currentPage-2 : 0;
             let max = min+5 < this.state.numPages ? min + 5 : this.state.numPages;
             if(max === this.state.numPages){

@@ -3,6 +3,7 @@ import './signUp.css';
 import './signUpMedia.css';
 import axios from 'axios';
 import Loading from '../../tools/loading/loading';
+import {Link} from 'react-router-dom';
 
 class SignUp extends Component {
    constructor(props){
@@ -182,6 +183,10 @@ class SignUp extends Component {
                             <input className="submitButton button-link" type="submit" value="Sign Up"/>
                             <h2 className="signUpFormErrorMessage">{this.state.errorMessage}</h2>
                         </form>
+                    </div>
+                    <div className="loginMessage">
+                        <h3>Already Have an Account?</h3>
+                        <h3>Click <Link to={"/login"}>HERE</Link> to Log In</h3>
                     </div>
                 </div>
             </div>

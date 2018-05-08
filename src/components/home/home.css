@@ -14,25 +14,23 @@
 .scrollingImg{
 	background-size: cover;
 	background-repeat: no-repeat;
-	/*height: 20vw;*/
 	width: 100%;
-	/*display: inline-block;*/
 	background-position: top center;
 	margin: 0;
 	border-style: solid;
 	border-width: medium;
 	border-color: rgb(39, 39, 39);
 	border-top: none;
+	min-height: 100px;
 	
 }
 .scrollingImgColumn{
 	width: 100%;
 }
-/*.scrollingImgContainer{
-	position: relative;
-	height: 20vw;
-	transition: bottom .1s; 
-}*/
+.scrollingImgColumn:nth-child(odd){
+	top:-9%;
+	position:relative;
+}
 .shadow{
     position: absolute;
 	left: 0;

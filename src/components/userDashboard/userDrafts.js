@@ -3,7 +3,7 @@ import './userParts/userParts.css';
 import {Link} from 'react-router-dom';
 import Loading from '../tools/loading/loading';
 import axios from 'axios';
-import UpdatePartStatus from "./userParts/updatePartStatus"
+import UpdatePartStatus from "./userParts/updatePartStatus";
 
 
 class UserDrafts extends Component {
@@ -17,6 +17,10 @@ class UserDrafts extends Component {
         }
     }
 
+    /**
+     * [componentDidMount: use seller_id to retrieve all the parts that were listed by that user]
+     * @return {promise} [data contains info for all the parts and the 1st image of each part]
+     */
     componentDidMount(){
         const seller_id = this.state.seller_id;
         const url = 'http://localhost:8000/teampartpig/src/assets/php/allPartBySeller.php';
@@ -27,14 +31,13 @@ class UserDrafts extends Component {
                     isLoading: true           
                 }); 
             }).catch(err => {
-                console.log('error is: ', err);
+                // console.log('error is: ', err);
                 this.props.history.push('/error');                
             }
         ); 
     } 
 
     render(){
-
         if (!this.state.isLoading) {
             return (
                 <div>                    
@@ -46,30 +49,27 @@ class UserDrafts extends Component {
         let part = this.state.partInfo;
         const list = part.map((item,index)=>{
             if(item.status === "draft"){
-                console.log(item.usd_price)
             let id = item.id;
             let status = item.status;
             return  (
-                
-                    <div key={index} className="dashboardPart">
-                        <img className="dash-mainImage alignMiddle" src={item.images}></img>
-                        <div className="listingId alignMiddle">{item.id}</div>
-                        <div className="dash-partNumber alignMiddle">{item.part_number}</div>
-                        <div className="brand alignMiddle"> {item.brand} </div>
-                        <div className="partName alignMiddle">{item.part_name}</div>
-                        <div className="fitment alignMiddle"> {item.make} {item.model} {item.year}</div>
-                        <div className="price alignMiddle">${parseFloat(item.price_usd)}</div>
-                        <div className="statusUpdateContainer">
-                        <Link className="button-link editPart" key={index} to={"/partdetails/" + item.id+'/true'}>Edit</Link> 
-                        <UpdatePartStatus id = {id} status = {status}/></div> 
-                     </div>
-                     );
-                    } else {
-                        return
-                    }                    
+                <div key={index} className="dashboardPart">
+                    <img className="dash-mainImage alignMiddle" src={item.images}></img>
+                    <div className="listingId alignMiddle">{item.id}</div>
+                    <div className="dash-partNumber alignMiddle">{item.part_number}</div>
+                    <div className="brand alignMiddle"> {item.brand} </div>
+                    <div className="partName alignMiddle">{item.part_name}</div>
+                    <div className="fitment alignMiddle"> {item.make} {item.model} {item.year}</div>
+                    <div className="price alignMiddle">${parseFloat(item.price_usd)}</div>
+                    <div className="statusUpdateContainer">
+                    <Link className="button-link editPart" key={index} to={"/partdetails/" + item.id+'/true'}>Edit</Link> 
+                    <UpdatePartStatus id = {id} status = {status}/></div> 
+                 </div>
+                 );
+            } else {
+                return
+            }                    
         });
 
-        
         return  (
             <div className="userPartsContainer"> 
             <h2>Your Drafts</h2>    
@@ -88,8 +88,7 @@ class UserDrafts extends Component {
                 </div>
             </div>        
         );
-                    
     }
 }
 
-export default UserDrafts
+export default UserDrafts;

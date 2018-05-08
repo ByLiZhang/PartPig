@@ -28,6 +28,7 @@ class ImageGallery extends Component{
     }
     
     componentDidUpdate(){
+        //we only update the main image when change and we don't have the list
         if(this.state.mainImg !== this.props.mainImage && !this.changeList){
             this.setState({
                 mainImg:this.props.mainImage
@@ -39,7 +40,7 @@ class ImageGallery extends Component{
         
         let list = [];
         var divList = '';
-        //we control if we need the list of the images or not
+        //control if we need the list of the images or not
         if(this.props.showList){ 
             //we go through every image in the list and create the element           
             list = this.props.imageList.map((item,index)=>{

@@ -7,6 +7,7 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import Modal from './startModal/startModal';
 
 class Home extends Component {
   
@@ -15,10 +16,18 @@ class Home extends Component {
     this.state = {
       images: props.images,
     }
+    this.index = 1;
   }
-
   randomizeArray(array){
-    const sourceArray = array.slice();
+    //This splits our total image array into two halves so that columns won't have the same image as the adjacent ones
+    let sourceArray = [];
+    if(this.index % 2 === 0){
+      sourceArray = array.slice(0, 13);
+    }
+    else{
+       sourceArray = array.slice(13, 26);
+    }
+    this.index++;
     const newArray = [];
     while(sourceArray.length){
       let randomIndex = Math.floor(Math.random()*sourceArray.length);
@@ -31,14 +40,15 @@ class Home extends Component {
   render() {
     return (
       <div className="homeMainContainer">
+        <Modal/>
         <div className="scrollingBackground">
-          <ContentColumn shiftRate={1.0} displaySize={7} images={this.randomizeArray(this.state.images)} />
-          <ContentColumn shiftRate={0.6} displaySize={7} images={this.randomizeArray(this.state.images)} />
-          <ContentColumn shiftRate={0.8} displaySize={7} images={this.randomizeArray(this.state.images)} />
-          <ContentColumn shiftRate={0.5} displaySize={7} images={this.randomizeArray(this.state.images)} />
-          <ContentColumn shiftRate={1.0} displaySize={7} images={this.randomizeArray(this.state.images)} />
-          <ContentColumn shiftRate={.6} displaySize={7} images={this.randomizeArray(this.state.images)} />
-          <ContentColumn shiftRate={1.0} displaySize={7} images={this.randomizeArray(this.state.images)} />
+          <ContentColumn  displaySize={7} images={this.randomizeArray(this.state.images)} />
+          <ContentColumn  displaySize={7} images={this.randomizeArray(this.state.images)} />
+          <ContentColumn  displaySize={7} images={this.randomizeArray(this.state.images)} />
+          <ContentColumn  displaySize={7} images={this.randomizeArray(this.state.images)} />
+          <ContentColumn  displaySize={7} images={this.randomizeArray(this.state.images)} />
+          <ContentColumn displaySize={7} images={this.randomizeArray(this.state.images)} />
+          <ContentColumn  displaySize={7} images={this.randomizeArray(this.state.images)} />
           <div className="shadow">                     
             <Search {...this.props}/>
           </div>

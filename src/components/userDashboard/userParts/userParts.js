@@ -27,7 +27,7 @@ class UserParts extends Component {
                     isLoading: true           
                 }); 
             }).catch(err => {
-                console.log('error is: ', err);
+                // console.log('error is: ', err);
                 this.props.history.push('/error');                
             }
         ); 
@@ -60,12 +60,11 @@ class UserParts extends Component {
                     <Link className="button-link editPart" key={index} to={"/partdetails/" + item.id+'/true'}>Edit</Link> 
                     <UpdatePartStatus id = {id} status = {status}/></div>       
                 </div>         
-                 );
-                } else {
-                    return
-                }                    
-            });
-
+             );
+            } else {
+                return
+            }                    
+        });
         
         return  (
             <div className="userPartsContainer"> 
@@ -89,4 +88,4 @@ class UserParts extends Component {
     }
 }
 
-export default UserParts
+export default UserParts;

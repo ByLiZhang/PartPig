@@ -12,12 +12,13 @@ class PartDetails extends Component {
         this.state = {
             partInfo:{},
             isLoading: false,
-            newPart: false            
+            newPart: false  //when the user list the part          
         }          
     }
 
     componentDidMount(){
         const id = this.props.match.params.id;
+        //call the server to get the information of that specific part
         if(id){
             const url = 'http://localhost:8000/teampartpig/src/assets/php/singleItemDetail.php';
             const params = {id};      
@@ -36,7 +37,7 @@ class PartDetails extends Component {
                         this.oldPartInfo = resp.data.data[0];
                     }
                 }).catch(err => {
-                    console.log('error is: ', err);
+                    // console.log('error is: ', err);
                     this.props.history.push('/error');                
                 }
             ); 

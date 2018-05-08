@@ -25,32 +25,43 @@ class PartList extends Component{
         this.sortPartArray = this.sortPartArray.bind(this);
     }
 
+    /**
+     * we create the filters form the info we get of the parts
+     * @param {*} parts 
+     */
     initFilters(parts){
         let filters = {};
         let pricesArray = [];
         let pricesfilter = [];
         let brandsArray = [];        
         let categoriesArray = [];
-        for (let i = 0; i < parts.length; i++) {        
+        for (let i = 0; i < parts.length; i++) {     
+            //Brand filter   
             const brand = {
                 text: parts[i].brand,
                 checked: false
             };
+            //check to don't repit the same filter
             !this.containsObject(brand,brandsArray) ? brandsArray.push(brand):'';
+            //Price filter
             pricesArray.indexOf(parseInt(parts[i].price_usd))===-1 ? pricesArray.push(parseInt(parts[i].price_usd)) : '';   
+            //Category filter
             const category = {
                 text: parts[i].category,
                 checked: false
-            }         
+            }      
+            //check to don't repit the same filter   
             !this.containsObject(category,categoriesArray) ? categoriesArray.push(category):'';
         };
         const brandFilter = [brandsArray,true];
+
         pricesArray.sort((a,b)=>a-b);
         let pricesValues = [];
         pricesValues.push(pricesArray[0]);        
         pricesValues.push(pricesArray[pricesArray.length-1]);
         pricesfilter.push(pricesArray);
         pricesfilter.push(pricesValues);  
+
         const categoryFilter = [categoriesArray,true];
         filters['prices'] = pricesfilter;
         filters['brands'] = brandFilter;        
@@ -63,24 +74,23 @@ class PartList extends Component{
         if (!this.state.isLoading) {           
             const {make,model,year,keyword} = this.props.match.params;
             const params = {make,model,year,keyword};
-            const url = 'http://localhost:8000/teampartpig/src/assets/php/searchSubmit.php';        
+            const url = 'http://localhost:8000/teampartpig/src/assets/php/searchSubmit.php';    
+            //call the server to search with the conditions we have in the search    
             axios.get(url,{params}).then(resp=>{
                     try {
                         this.filters = (this.props.match.params.filters === undefined || this.props.match.params.filters.length === 0) ? this.initFilters(resp.data.data) : JSON.parse(this.props.match.params.filters);
                     } catch (error) {
-                        console.log('error is: ', error);
-                        console.log('filters:',this.props.match.params.filters);
-                        this.props.history.push('/error');      
-
+                        // console.log('error is: ', error);
+                        // console.log('filters:',this.props.match.params.filters);
+                        this.props.history.push('/error');  
                     }
-                    this.filters = (this.props.match.params.filters === undefined || this.props.match.params.filters.length === 0) ? this.initFilters(resp.data.data) : JSON.parse(this.props.match.params.filters);
-                   
+                    //we sort the parts by price
                     const partArraySorterByPrice = resp.data.data.sort((a,b)=> a.price_usd - b.price_usd);
                     this.setState({
                         arrayParts:partArraySorterByPrice,
                         isLoading: true            
                     });               
-                    
+                    //we filter the parts with the 3 filters
                     this.filterPriceMethod(this.filters['prices'][1]);
                     this.filterBrandMethod(this.filters['brands'][0],this.filters['brands'][1]);
                     this.filterCategoryMethod(this.filters['categories'][0],this.filters['categories'][1]);  
@@ -93,7 +103,7 @@ class PartList extends Component{
                     const url = this.props.match.url[this.props.match.url.length] === '/' ? this.props.match.url : this.props.match.url + '/';
                     this.props.history.push(this.props.match.url+'/filters/'+JSON.stringify(this.filters));
                 }).catch(err => {
-                    console.log('error is: ', err);
+                    // console.log('error is: ', err);
                     this.props.history.push('/error');      
                 }
             ); 
@@ -102,6 +112,7 @@ class PartList extends Component{
 
     componentWillUpdate(){        
         this.props.saveUrlBack(this.props.match.url);
+        //we only update when the pathname change
         if(this.props.history.location.pathname !== this.props.location.pathname){
             this.filterPriceMethod(this.filters['prices'][1]);
             this.filterBrandMethod(this.filters['brands'][0],this.filters['brands'][1]);
@@ -117,6 +128,11 @@ class PartList extends Component{
         }
     }
 
+    /**
+     * check if the object is in the list
+     * @param {*} obj 
+     * @param {*} list 
+     */
     containsObject(obj, list) {        
         for (let i = 0; i < list.length; i++) {
             if (list[i].text === obj.text) {
@@ -126,11 +142,19 @@ class PartList extends Component{
         return false;
     }
 
+    /**
+     * Check if the parts are in the list of brands are checked
+     * 
+     * @param {*} arrayBrands the brand to filter
+     * @param {*} all boolean indicate show all the parts
+     */
     filterBrandMethod(arrayBrands,all){
         const filteredParts = [...this.state.arrayParts];
         for (let i = 0; i < filteredParts.length; i++) {
             for(let j = 0; j < arrayBrands.length; j++){
+                //if the part and brand match
                 if (filteredParts[i].brand === arrayBrands[j].text) {
+                    //if it's checked we show the part
                     if(all || arrayBrands[j].checked){
                         filteredParts[i].display.brand = true;
                     }else{
@@ -144,11 +168,19 @@ class PartList extends Component{
         });
     }
 
+    /**
+     * Check if the parts are in the list of categories are checked
+     * 
+     * @param {*} arrayBrands the category to filter
+     * @param {*} all boolean indicate show all the parts
+     */
     filterCategoryMethod(arrayCategories,all){
         const filteredParts = [...this.state.arrayParts];
         for (let i = 0; i < filteredParts.length; i++) {
             for(let j = 0; j < arrayCategories.length; j++){
+                 //if the part and category match
                 if (filteredParts[i].category === arrayCategories[j].text) {
+                    //if it's checked we show the part
                     if(all || arrayCategories[j].checked){
                         filteredParts[i].display.category = true;
                     }else{
@@ -162,6 +194,11 @@ class PartList extends Component{
         });
     }
 
+    /**
+     * Check if the parts are in the range of prices
+     * 
+     * @param {*} values 
+     */
     filterPriceMethod(values){
         
         const min = values[0];
@@ -179,6 +216,10 @@ class PartList extends Component{
         });
     }
 
+    /**
+     * Sort the array of parts depending of the method chosen in the sorter component
+     * @param {*} method 
+     */
     sortPartArray(method){
         let sortArrayParts = [...this.state.arrayParts];
         sortArrayParts.sort(method);
@@ -187,6 +228,9 @@ class PartList extends Component{
         });
     }
 
+    /**
+     * when the user click in the filter's button we expand the filter's section
+     */
     handleShowFilters(){
         let showFilters = !this.state.showFilters;
         this.setState({

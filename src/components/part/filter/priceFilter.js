@@ -18,7 +18,9 @@ class PriceFilter extends Component{
       
 
     componentDidUpdate(){
+        //we only update the slider when the user click in the filters button to expand the filter section
         if(this.props.update){
+            //we remove the previous slider to don't have twice the same slider
             var parent = document.getElementById("priceFilterDiv");
             var child = document.getElementsByClassName("rs-container")[0];
             if(parent && child){
@@ -37,10 +39,15 @@ class PriceFilter extends Component{
         }
     }
 
+    /**
+     * method handle onCahnge in the slider
+     * @param {*} values 
+     */
     filterPrices(values){     
         let sliderElem = document.getElementsByClassName("rs-container")[0]
         //Check if the element is visible
         if(sliderElem && sliderElem.offsetParent !== null){   
+            //we change the values of the filter
             let valArray = values.split(',');
             const min = parseInt(valArray[0]);
             const max = parseInt(valArray[1]);

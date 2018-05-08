@@ -23,7 +23,6 @@ import axios from 'axios';
 import CheckoutComplete from './../checkout/checkoutComplete';
 import AxiosError from '../tools/errorHandling/error';
 import SignUpDetails from '../login/signUp/signupDetails';
-import Modal from './startModal/startModal';
 
 class App extends Component {
 
@@ -34,7 +33,7 @@ class App extends Component {
             userId: localStorage.getItem('user'),
             userName: ''
         }
-        this.images = ['part1.jpg','part2.jpg','part3.jpg','part4.jpg','part5.jpg','part6.jpg','part7.jpg','part8.jpg','part9.jpg','part10.jpg','part11.jpg','part12.jpg','part13.jpg','part14.jpg','part15.jpg','part16.jpg','part17.jpg','part18.jpg','part19.jpg','part20.jpg','part21.jpg','part22.jpg','part23.jpg','part24.jpg','part25.jpg','part26.jpg','part27.jpg','part28.jpg','part29.jpg','part30.jpg'];
+        this.images = ['part1.jpg','part2.jpg','part3.jpg','part4.jpg','part5.jpg','part6.jpg','part7.jpg','part8.jpg','part10.jpg','part11.jpg','part12.jpg','part13.jpg','part15.jpg','part17.jpg','part18.jpg', 'part20.jpg','part21.jpg','part22.jpg','part23.jpg','part24.jpg','part25.jpg','part26.jpg','part27.jpg','part28.jpg','part29.jpg','part30.jpg'];
 
 
         this.addPart = this.addPart.bind(this);
@@ -225,10 +224,10 @@ class App extends Component {
     }
 
     render() {
+     
         return (
             <Router>
                 <div className='mainContainer'>
-                       <div className='fadeOverlay'></div>
                         <Header userId={this.state.userId} logout={this.logout.bind(this)} />
                         <Route exact path='/' render={props => <Home images={this.images} {...props} />} />
                         <Route exact path='/partresults' render={props => <PartList cartParts={this.state.cartParts} saveUrlBack={this.saveUrlBack} addCart={this.addPart} {...props} />} />
@@ -253,8 +252,6 @@ class App extends Component {
                         <Route path='/error' component={AxiosError} />
                         <Route path='/signup' component={SignUp} />
                         <Route path='/signUpDetails/:userId' component={SignUpDetails} />
-
-                        <Modal />
                         <Footer />
                     </div>
             </Router>

@@ -221,10 +221,16 @@ footer {
     text-align: center;
 }
 
-footer a {
+.footer {
     color: white;
     margin-left: .5em;
     margin-right: .5em;
+}
+
+.legal > p {
+    display: inline-block;
+    margin-right: 2%;
+    margin-bottom: 0;
 }
 /*==================== contact page styling ===========================*/
 .contact-us {

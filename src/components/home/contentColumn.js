@@ -8,31 +8,10 @@ class ContentColumn extends Component{
       super(props);
       this.state = {
         blockHeight: 100/props.displaySize,
-        // position: 0,
         images: props.images
       }
-      this.handleTimerUpdate = this.handleTimerUpdate.bind(this);
     }
-
-    handleTimerUpdate(){
-      let newPosition = this.state.position+this.props.shiftRate
-      if(newPosition > (this.itemHeight *1.15)){
-        newPosition = 0;
-        var nextArray = this.state.images.slice();
-        nextArray.push( nextArray.shift());
-      } else {
-        nextArray = this.state.images;
-      }
-      
-      this.setState({
-        position: newPosition,
-        images: nextArray
-      })
-  
-    }
-
     componentDidMount(){
-      // setInterval( this.handleTimerUpdate, 10);
       this.itemHeight = this.column.clientHeight / this.props.displaySize;
     }
 

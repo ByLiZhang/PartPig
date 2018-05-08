@@ -1,7 +1,7 @@
 <?php
-require '../vendor/autoload.php';
-require('./awsConnect.php');
-require('s3Functions.php');
+require('../vendor/autoload.php');
+require('../config/awsConnect.php');
+require('./s3Functions.php');
 
 //This file is being required by processSellpartForm.php
 
