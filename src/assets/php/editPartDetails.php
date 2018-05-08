@@ -1,8 +1,7 @@
 <?php
 require_once('./config/mysqlConnect.php');
 
-
-
+//basic output form
 $output = [
     'success'=> false,
     'error' => [],
