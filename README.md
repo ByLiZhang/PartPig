@@ -16,7 +16,7 @@ PartPig is still in beta. Because of that we focused most of the parts for sale 
 Please search these categories for a better experience.
 
 ## Project
-view this project [live](http://partpig.bylizhang.com)
+view this project [live](https://partpig.bylizhang.com)
 
 ## Features
 - [x] Image upload and hosting with AWS
@@ -39,5 +39,5 @@ view this project [live](http://partpig.bylizhang.com)
 [ByLiZhang](https://github.com/ByLiZhang) 
 
 ## License
-This project is licensed under the MIT License © [Li Zhang](http://bylizhang.com)
+This project is licensed under the MIT License © [Li Zhang](https://bylizhang.com)
 
