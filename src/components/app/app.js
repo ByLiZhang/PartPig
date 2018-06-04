@@ -218,6 +218,13 @@ class App extends Component {
         });
     }
 
+    componentDidMount(){    
+        window.addEventListener("scroll", function(){
+            let checkboxElem = document.querySelector('#menuToggle input[type=checkbox]');
+            checkboxElem.checked = false;
+        });
+    }
+
     render() {
      
         return (
